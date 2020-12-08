@@ -1,20 +1,16 @@
 package racingcar.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class TotalRacingResults {
-	private List<RacingResults> totalResults;
+	private final List<RacingResults> totalResults;
 
 	public TotalRacingResults(List<RacingResults> totalResults) {
-		if (totalResults == null) {
-			totalResults = new ArrayList<>();
-		}
-		this.totalResults = totalResults;
-	}
-
-	public List<RacingResults> getTotalResults() {
-		return totalResults;
+		this.totalResults = Optional.ofNullable(totalResults)
+			.orElse(Collections.emptyList());
 	}
 
 	public List<String> winners() {
@@ -26,5 +22,9 @@ public class TotalRacingResults {
 
 	private RacingResults finalResult() {
 		return this.totalResults.get(this.totalResults.size() - 1);
+	}
+
+	public List<RacingResults> getTotalResults() {
+		return totalResults;
 	}
 }
